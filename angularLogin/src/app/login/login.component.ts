@@ -12,12 +12,14 @@ export class LoginComponent implements OnInit {
     email:new FormControl(),
     password:new FormControl()
   });
+  result:string="";
+  flag:boolean=false;
   constructor(public loginSer:LoginService) { }
   ngOnInit(): void {}
 
   checkUser() {
     let login = this.loginRef.value;
-      this.loginSer.checkUser().subscribe(result=> {
+      this.loginSer.checkUser().subscribe(result=> {arguments   
         let leng = result.length;
         let flag = 0;
         for(let i=0;i<leng;i++){
@@ -28,8 +30,12 @@ export class LoginComponent implements OnInit {
         }
         if(flag>0){
             console.log("Successfully Login ");
+            this.flag=true;
+          this.result="Login Successful"
         }else {
             console.log("Failure try once again");
+            this.flag=true;
+            this.result="Login Failure"
         }
       })
     }
